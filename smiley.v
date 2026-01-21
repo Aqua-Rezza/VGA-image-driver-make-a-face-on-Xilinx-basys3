@@ -21,15 +21,12 @@ module smiley(
 	
 	wire clk25MHz;
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// clk divider 50 MHz to 25 MHz
+	// clk divider 100 MHz to 25 MHz
 clock_divider vga(
 .clk_in (clk),
 .clk_out (clk25MHz)
 );
-	// end clk divider 50 MHz to 25 MHz
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// counter and sync generation
 	always @(posedge clk25MHz)  // horizontal counter
 		begin 
@@ -47,17 +44,12 @@ clock_divider vga(
 						counter_y <= counter_y + 1;
 					else
 						counter_y <= 0;              
-				end  // if (counter_x...
-		end  // always
-	// end counter and sync generation  
-
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				end  
+		end  
 	// hsync and vsync output assignments
 	assign o_hsync = (counter_x >= 0 && counter_x < 96) ? 1:0;  // hsync high for 96 counts                                                 
 	assign o_vsync = (counter_y >= 0 && counter_y < 2) ? 1:0;   // vsync high for 2 counts
-	// end hsync and vsync output assignments
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// pattern generate
 		always @ (posedge clk)
 		begin
@@ -67,7 +59,7 @@ clock_divider vga(
 					r_red <= 4'hF;    // white
 					r_blue <= 4'hF;
 					r_green <= 4'hF;
-				end  // if (counter_y < 135)
+				end  
 			////////////////////////////////////////////////////////////////////////////////////// END SECTION 1
 			
 			////////////////////////////////////////////////////////////////////////////////////// SECTION 2
@@ -78,20 +70,20 @@ clock_divider vga(
 							r_red <= 4'hF;    // white
 							r_blue <= 4'hF;
 							r_green <= 4'hF;
-						end  // if (counter_x < 324)
+						end  
 					else if (counter_x >= 324 && counter_x < 604)
 						begin 
 							r_red <= 4'hF;    // yellow
 							r_blue <= 4'h0;
 							r_green <= 4'hF;
-						end  // else if (counter_x >= 324 && counter_x < 604)
+						end  
 					else if (counter_x >= 604)
 						begin 
 							r_red <= 4'hF;    // white
 							r_blue <= 4'hF;
 							r_green <= 4'hF;
-						end  // else if (counter_x >= 604)
-					end  // else if (counter_y >= 135 && counter_y < 205)
+						end  
+					end  
 			////////////////////////////////////////////////////////////////////////////////////// END SECTION 2
 			
 			////////////////////////////////////////////////////////////////////////////////////// SECTION 3
@@ -102,44 +94,44 @@ clock_divider vga(
 							r_red <= 4'hF;    // white
 							r_blue <= 4'hF;
 							r_green <= 4'hF;
-						end  // if (counter_x < 324)
+						end  
 					else if (counter_x >= 324 && counter_x < 371)
 						begin 
 							r_red <= 4'hF;    // yellow
 							r_blue <= 4'h0;
 							r_green <= 4'hF;
-						end  // else if (counter_x >= 324 && counter_x < 371)
+						end  
 					else if (counter_x >= 371 && counter_x < 383)
 						begin 
 							r_red <= 4'h0;    // black
 							r_blue <= 4'h0;
 							r_green <= 4'h0;
-						end  // else if (counter_x >= 371 && counter_x < 383)
+						end  
 					else if (counter_x >= 383 && counter_x < 545)
 						begin 
 							r_red <= 4'hF;    // yellow
 							r_blue <= 4'h0;
 							r_green <= 4'hF;
-						end  // else if (counter_x >= 383 && counter_x < 545)
+						end 
 					else if (counter_x >= 545 && counter_x < 557)
 						begin 
 							r_red <= 4'h0;    // black
 							r_blue <= 4'h0;
 							r_green <= 4'h0;
-						end  // else if (counter_x >= 545 && counter_x < 557)
+						end  
 					else if (counter_x >= 557 && counter_x < 604)
 						begin 
 							r_red <= 4'hF;    // yellow
 							r_blue <= 4'h0;
 							r_green <= 4'hF;
-						end  // else if (counter_x >= 557 && counter_x < 604)
+						end 
 					else if (counter_x >= 604)
 						begin 
 							r_red <= 4'hF;    // white
 							r_blue <= 4'hF;
 							r_green <= 4'hF;
-						end  // else if (counter_x >= 604)
-				end  // else if (counter_y >= 205 && counter_y < 217)
+						end 
+				end  
 			////////////////////////////////////////////////////////////////////////////////////// END SECTION 3
 			
 			////////////////////////////////////////////////////////////////////////////////////// SECTION 4
@@ -150,20 +142,20 @@ clock_divider vga(
 							r_red <= 4'hF;    // white
 							r_blue <= 4'hF;
 							r_green <= 4'hF;
-						end  // if (counter_x < 324)
+						end  
 					else if (counter_x >= 324 && counter_x < 604)
 						begin 
 							r_red <= 4'hF;    // yellow
 							r_blue <= 4'h0;
 							r_green <= 4'hF;
-						end  // else if (counter_x >= 324 && counter_x < 604)
+						end  
 					else if (counter_x >= 604)
 						begin 
 							r_red <= 4'hF;    // white
 							r_blue <= 4'hF;
 							r_green <= 4'hF;
-						end  // else if (counter_x >= 604)	
-				end  // else if (counter_y >= 217 && counter_y < 305)
+						end  
+				end  
 			////////////////////////////////////////////////////////////////////////////////////// END SECTION 4
 			
 			////////////////////////////////////////////////////////////////////////////////////// SECTION 5
@@ -174,32 +166,32 @@ clock_divider vga(
 							r_red <= 4'hF;    // white
 							r_blue <= 4'hF;
 							r_green <= 4'hF;
-						end  // if (counter_x < 324)
+						end  
 					else if (counter_x >= 324 && counter_x < 371)
 						begin 
 							r_red <= 4'hF;    // yellow
 							r_blue <= 4'h0;
 							r_green <= 4'hF;
-						end  // else if (counter_x >= 324 && counter_x < 371)
+						end  
 					else if (counter_x >= 371 && counter_x < 557)
 						begin 
 							r_red <= 4'h0;    // black
 							r_blue <= 4'h0;
 							r_green <= 4'h0;
-						end  // else if (counter_x >= 371 && counter_x < 557)
+						end  
 					else if (counter_x >= 557 && counter_x < 604)
 						begin 
 							r_red <= 4'hF;    // yellow
 							r_blue <= 4'h0;
 							r_green <= 4'hF;
-						end  // else if (counter_x >= 557 && counter_x < 604)
+						end 
 					else if (counter_x >= 604)
 						begin 
 							r_red <= 4'hF;    // white
 							r_blue <= 4'hF;
 							r_green <= 4'hF;
-						end  // else if (counter_x >= 604)	
-				end  // else if (counter_y >= 217 && counter_y < 305)
+						end  
+				end  
 			////////////////////////////////////////////////////////////////////////////////////// END SECTION 5
 			
 			////////////////////////////////////////////////////////////////////////////////////// SECTION 6
@@ -210,20 +202,20 @@ clock_divider vga(
 							r_red <= 4'hF;    // white
 							r_blue <= 4'hF;
 							r_green <= 4'hF;
-						end  // if (counter_x < 324)
+						end  
 					else if (counter_x >= 324 && counter_x < 604)
 						begin 
 							r_red <= 4'hF;    // yellow
 							r_blue <= 4'h0;
 							r_green <= 4'hF;
-						end  // else if (counter_x >= 324 && counter_x < 604)
+						end  
 					else if (counter_x >= 604)
 						begin 
 							r_red <= 4'hF;    // white
 							r_blue <= 4'hF;
 							r_green <= 4'hF;
-						end  // else if (counter_x >= 604)	
-				end  // else if (counter_y >= 305 && counter_y < 414)
+						end  
+				end 
 			////////////////////////////////////////////////////////////////////////////////////// END SECTION 6
 			
 			////////////////////////////////////////////////////////////////////////////////////// SECTION 7
@@ -232,9 +224,9 @@ clock_divider vga(
 					r_red <= 4'hF;    // white
 					r_blue <= 4'hF;
 					r_green <= 4'hF;
-				end  // if (counter_y >= 414)
+				end  
 			////////////////////////////////////////////////////////////////////////////////////// END SECTION 7
-		end  // always
+		end  
 						
 	// end pattern generate
 
